@@ -1,7 +1,3 @@
-//
-// Created by Nicolas on 06/05/2020.
-//
-
 #include "CSVParser.h"
 #include <iostream>
 #include <fstream>
@@ -24,7 +20,6 @@ void CSVParser::ReadCleanersCSV (const std::string & filename, std::vector<Clean
 {
     std::ifstream file(filename);
     Cleaner cleaner;
-    file >> cleaner; //On lit l'en-tête que l'on n'ajoute pas à la collection
     while(file.good())
     {
         file >> cleaner;
@@ -38,7 +33,6 @@ void CSVParser::ReadMeasuresCSV (const std::string & filename, std::vector<Measu
 {
     std::ifstream file(filename);
     Measure measure;
-    file >> measure; //On lit l'en-tête que l'on n'ajoute pas à la collection
     while(file.good())
     {
         file >> measure;
@@ -52,7 +46,6 @@ void CSVParser::ReadProvidersCSV (const std::string & filename, std::vector<Prov
 {
     std::ifstream file(filename);
     Provider provider;
-    file >> provider; //On lit l'en-tête que l'on n'ajoute pas à la collection
     while(file.good())
     {
         file >> provider;
@@ -66,7 +59,6 @@ void CSVParser::ReadSensorsCSV (const std::string & filename, std::vector<Sensor
 {
     std::ifstream file(filename);
     Sensor sensor;
-    file >> sensor; //On lit l'en-tête que l'on n'ajoute pas à la collection
     while(file.good())
     {
         file >> sensor;
@@ -80,7 +72,6 @@ void CSVParser::ReadPrivateIndividualsCSV(const std:: & filename, std::vector<Pr
 {
     std::ifstream file(filename);
     PrivateIndividual privateIndividual;
-    file >> privateIndividual; //On lit l'en-tête que l'on n'ajoute pas à la collection
     while(file.good())
     {
         file >> privateIndividual;
