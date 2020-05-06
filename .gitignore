@@ -32,8 +32,11 @@
 *.app
 
 #QtCreator
-
 AirWatcher.pro
 AirWatcher.pro.user
 main.cpp
 build-AirWatcher-Desktop_Qt_5_12_6_MSVC2017_32bit-Debug
+
+#clion cmake files
+cmake-build-debug/*
+.idea/*
