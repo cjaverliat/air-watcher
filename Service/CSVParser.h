@@ -8,16 +8,28 @@
 #include <string>
 #include <vector>
 
-#include "../Metier/Attribute"
-#include "../Metier/Cleaner"
+#include "../Metier/Data/Attribute.h"
+#include "../Metier/Data/Cleaner.h"
+#include "../Metier/Data/Measure.h"
+#include "../Metier/Acteurs/Provider.h"
+#include "../Metier/Data/Sensor.h"
+#include "../Metier/Acteurs/PrivateIndividual.h"
 
 class CSVParser {
 
 public:
 
-    static void ReadAttributesCSV (std::string filename, std::vector<Attribute> & attributes);
+    static void ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes);
 
-    static void ReadCleanersCSV (std::string filename, std::vector<Cleaner> & cleaner);
+    static void ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners);
+
+    static void ReadMeasuresCSV (const std::string & filename, std::vector<Measure> & measures);
+
+    static void ReadProvidersCSV (const std::string & filename, std::vector<Provider> & providers);
+
+    static void ReadSensorsCSV (const std::string & filename, std::vector<Sensor> & sensors);
+
+    static void ReadPrivateIndividualsCSV (const std::string & filename, std::vector<PrivateIndividual> & privateIndividuals);
 
     CSVParser (const CSVParser & unCSVParser);
 

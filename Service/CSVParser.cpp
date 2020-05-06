@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 
-void CSVParser::ReadAttributesCSV (std::string filename, std::vector<Attribute> & attributes)
+void CSVParser::ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes)
 {
     std::ifstream file(filename);
     Attribute attribute;
@@ -20,7 +20,7 @@ void CSVParser::ReadAttributesCSV (std::string filename, std::vector<Attribute> 
 
 } //----- Fin de ReadAttributesCSV
 
-void CSVParser::ReadCleanersCSV (std::string filename, std::vector<Cleaner> & cleaners)
+void CSVParser::ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners)
 {
     std::ifstream file(filename);
     Cleaner cleaner;
@@ -33,6 +33,62 @@ void CSVParser::ReadCleanersCSV (std::string filename, std::vector<Cleaner> & cl
     }
 
 } //----- Fin de ReadCleanersCSV
+
+void CSVParser::ReadMeasuresCSV (const std::string & filename, std::vector<Measure> & measures)
+{
+    std::ifstream file(filename);
+    Measure measure;
+    file >> measure; //On lit l'en-tête que l'on n'ajoute pas à la collection
+    while(file.good())
+    {
+        file >> measure;
+        if(!file.good()) break;
+        measures.push_back(measure);
+    }
+
+} //----- Fin de ReadMeasuresCSV
+
+void CSVParser::ReadProvidersCSV (const std::string & filename, std::vector<Provider> & providers)
+{
+    std::ifstream file(filename);
+    Provider provider;
+    file >> provider; //On lit l'en-tête que l'on n'ajoute pas à la collection
+    while(file.good())
+    {
+        file >> provider;
+        if(!file.good()) break;
+        providers.push_back(provider);
+    }
+
+} //----- Fin de ReadProvidersCSV
+
+void CSVParser::ReadSensorsCSV (const std::string & filename, std::vector<Sensor> & sensors)
+{
+    std::ifstream file(filename);
+    Sensor sensor;
+    file >> sensor; //On lit l'en-tête que l'on n'ajoute pas à la collection
+    while(file.good())
+    {
+        file >> sensor;
+        if(!file.good()) break;
+        sensors.push_back(sensor);
+    }
+
+} //----- Fin de ReadSensorsCSV
+
+void CSVParser::ReadPrivateIndividualsCSV(const std:: & filename, std::vector<PrivateIndividual> & privateIndividuals)
+{
+    std::ifstream file(filename);
+    PrivateIndividual privateIndividual;
+    file >> privateIndividual; //On lit l'en-tête que l'on n'ajoute pas à la collection
+    while(file.good())
+    {
+        file >> privateIndividual;
+        if(!file.good()) break;
+        privateIndividuals.push_back(privateIndividual);
+    }
+
+} //----- Fin de ReadPrivateIndividualsCSV
 
 CSVParser::CSVParser ( )
 {
