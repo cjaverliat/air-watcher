@@ -1,12 +1,12 @@
 #include <iostream>
 #include <limits>
 
-#include "Service/CSVParser.h"
-#include "Metier/Data/Catalog.h"
-#include "Metier/Acteurs/PrivateIndividual.h"
-#include "Metier/Acteurs/Provider.h"
-#include "Metier/Acteurs/Decider.h"
-#include "Metier/Acteurs/SuperUser.h"
+#include "service/CSVParser.h"
+#include "metier/data/Catalog.h"
+#include "metier/acteurs/PrivateIndividual.h"
+#include "metier/acteurs/Provider.h"
+#include "metier/acteurs/Decider.h"
+#include "metier/acteurs/SuperUser.h"
 
 using namespace std;
 

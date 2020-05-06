@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 
-#include "../Metier/Data/Attribute.h"
-#include "../Metier/Data/Cleaner.h"
-#include "../Metier/Data/Measure.h"
-#include "../Metier/Acteurs/Provider.h"
-#include "../Metier/Data/Sensor.h"
-#include "../Metier/Acteurs/PrivateIndividual.h"
+#include "../metier/data/Attribute.h"
+#include "../metier/data/Cleaner.h"
+#include "../metier/data/Measure.h"
+#include "../metier/acteurs/Provider.h"
+#include "../metier/data/Sensor.h"
+#include "../metier/acteurs/PrivateIndividual.h"
 
 class CSVParser {
 
