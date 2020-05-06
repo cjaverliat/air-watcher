@@ -9,12 +9,15 @@
 #include <vector>
 
 #include "../Metier/Attribute"
+#include "../Metier/Cleaner"
 
 class CSVParser {
 
 public:
 
     static void ReadAttributesCSV (std::string filename, std::vector<Attribute> & attributes);
+
+    static void ReadCleanersCSV (std::string filename, std::vector<Cleaner> & cleaner);
 
     CSVParser (const CSVParser & unCSVParser);
 

@@ -20,6 +20,20 @@ void CSVParser::ReadAttributesCSV (std::string filename, std::vector<Attribute> 
 
 } //----- Fin de ReadAttributesCSV
 
+void CSVParser::ReadCleanersCSV (std::string filename, std::vector<Cleaner> & cleaners)
+{
+    std::ifstream file(filename);
+    Cleaner cleaner;
+    file >> cleaner; //On lit l'en-tête que l'on n'ajoute pas à la collection
+    while(file.good())
+    {
+        file >> cleaner;
+        if(!file.good()) break;
+        cleaners.push_back(cleaner);
+    }
+
+} //----- Fin de ReadCleanersCSV
+
 CSVParser::CSVParser ( )
 {
 #ifdef MAP
