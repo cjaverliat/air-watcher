@@ -1,7 +1,3 @@
-//
-// Created by Nicolas on 06/05/2020.
-//
-
 #ifndef SRC_CSVPARSER_H
 #define SRC_CSVPARSER_H
 

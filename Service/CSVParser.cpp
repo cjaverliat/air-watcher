@@ -1,7 +1,3 @@
-//
-// Created by Nicolas on 06/05/2020.
-//
-
 #include "CSVParser.h"
 #include <iostream>
 #include <fstream>
