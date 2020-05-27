@@ -16,7 +16,7 @@ public:
     Provider(Catalog* catalog);
     Provider(const string & login,const string & password, Cleaner* & cleaner);
     Cleaner* getCleaner() const;
-    void setCleaner(Cleaner* &cleaner);
+    void setCleaner(Cleaner* cleaner);
     friend istream & operator >> (istream & in, Provider & provider);
 };
 

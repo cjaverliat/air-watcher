@@ -16,7 +16,7 @@ Cleaner* Provider::getCleaner() const
     return _cleaner;
 }
 
-void Provider::setCleaner(Cleaner* &cleaner)
+void Provider::setCleaner(Cleaner* cleaner)
 {
     _cleaner = cleaner;
 }
