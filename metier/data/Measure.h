@@ -1,8 +1,8 @@
 #ifndef MEASURE_H
 #define MEASURE_H
 
-#include<time.h>
-#include"Sensor.h"
+#include <time.h>
+#include "Sensor.h"
 
 using namespace std;
 
@@ -11,18 +11,19 @@ class Measure
 protected:
     unsigned int _id;
     double _valeurO3;
-    double _valeurS02;
+    double _valeurSO2;
     double _valeurNO2;
     double _valeurPM10;
     time_t _date;
     Sensor _sensor;
+
 public:
     Measure();
-    Measure(const unsigned int & id, const double & valeurO3, const double & valeurSO2, const double & valeurNO2, const double & valeurPM10, const time_t & date, const Sensor & sensor);
-    double getValeurO3() const;
-    double getValeurS02() const;
-    double getValeurNO2() const;
-    double getValeurPM10() const;
+    Measure(const unsigned int &id, const double &valueO3, const double &valueSO2, const double &valueNO2, const double &valuePM10, const time_t &date, const Sensor &sensor);
+    double getValueO3() const;
+    double getValueSO2() const;
+    double getValueNO2() const;
+    double getValuePM10() const;
     time_t getDate() const;
     Sensor getSensor() const;
     unsigned int getId() const;
