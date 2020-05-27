@@ -1,5 +1,5 @@
 CXX=g++
-CXX_FLAGS=-O3 -g -Wall -Werror -pedantic -std=c++17
+CXX_FLAGS=-O3 -g -Wall -Werror -pedantic -std=c++11
 
 BUILD_DIR=./build
 PROG=airwatcher
