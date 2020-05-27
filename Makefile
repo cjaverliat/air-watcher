@@ -14,7 +14,7 @@ $(BUILD_DIR)/$(PROG): $(OBJS)
 	$(CXX) $(OBJS) -o $@
 
 $(BUILD_DIR)/%.cpp.o: %.cpp
-	mkdir -p $(BUILD_DIR)
+	mkdir -p $(dir $@)
 	$(CXX) $(CXX_FLAGS) -c $< -o $@
 
 .PHONY: clean
