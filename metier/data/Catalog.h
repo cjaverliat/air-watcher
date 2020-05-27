@@ -8,7 +8,12 @@
 #include"../acteurs/PrivateIndividual.h"
 #include<vector>
 
+class Provider;
+class PrivateIndividual;
+
 using namespace std;
+
+class Measure;
 
 class Catalog
 {
@@ -30,6 +35,12 @@ public:
     const vector<Provider> &getProviders() const;
 
     const vector<PrivateIndividual> &getPrivateIndividuals() const;
+
+    Sensor* getSensorById(unsigned int sensorId);
+
+    Cleaner* getCleanerById(unsigned int cleanerId);
+
+    friend class CSVParser;
 };
 
 #endif // CATALOG_H

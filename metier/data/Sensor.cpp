@@ -1,5 +1,9 @@
 #include "Sensor.h"
 
+Sensor::Sensor(){
+
+}
+
 Sensor::Sensor(const unsigned int &id, const string &description, const Coordinates &coordinates)
     :_id(id),_description(description),_coordinates(coordinates)
 {
@@ -29,4 +33,20 @@ string Sensor::getDescription() const
 void Sensor::setDescription(const string &value)
 {
     _description = value;
+}
+
+istream & operator>>(istream & in, Sensor & sensor) {
+    string sensorId, latitude, longitude, description;
+    getline(in, sensorId, ';');
+    getline(in, latitude, ';');
+    getline(in, longitude, ';');
+    getline(in, description, '\n');
+
+    sensorId = sensorId.substr(6, sensorId.size());
+
+    sensor._id = stoi(sensorId);
+    sensor._coordinates = Coordinates(stod(latitude), stod(longitude));
+    sensor._description = description;
+
+    return in;
 }

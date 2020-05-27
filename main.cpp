@@ -10,6 +10,8 @@
 
 using namespace std;
 
+static Catalog catalog = Catalog();
+
 void SelectPrivateIndividual(Catalog & catalog);
 void SelectProvider(Catalog & catalog);
 
@@ -27,7 +29,6 @@ void ClearBuffer()
 int main(){
 
     cout << "Chargement des données en cours, veuillez patienter." << endl << endl;
-    Catalog catalog = Catalog();
     //TODO Initialiser les données
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
@@ -181,7 +182,7 @@ void SuperUserView(SuperUser & superUser) {
 }
 
 void SelectPrivateIndividual(Catalog & catalog) {
-    int commande = 0;
+    unsigned commande = 0;
     for(;;)
     {
         cout << "Choisissez l'individu privé souhaité" << endl;
@@ -206,7 +207,7 @@ void SelectPrivateIndividual(Catalog & catalog) {
 }
 
 void SelectProvider(Catalog &catalog) {
-    int commande = 0;
+    unsigned commande = 0;
     for(;;)
     {
         cout << "Choisissez le fournisseur d'AirCleaners souhaité" << endl;

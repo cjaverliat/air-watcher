@@ -1,17 +1,23 @@
 #ifndef PROVIDER_H
 #define PROVIDER_H
 
-#include"Actor.h"
-#include"../data/Cleaner.h"
+#include "Actor.h"
+#include "../data/Cleaner.h"
+#include "../data/Catalog.h"
+
+class Catalog;
 
 class Provider : public Actor
 {
 protected:
-    Cleaner _cleaner;
+    Cleaner* _cleaner;
+    Catalog* _catalog;
 public:
-    Provider(const string & login,const string & password, const Cleaner & cleaner);
-    Cleaner getCleaner() const;
-    void setCleaner(const Cleaner &cleaner);
+    Provider(Catalog* catalog);
+    Provider(const string & login,const string & password, Cleaner* & cleaner);
+    Cleaner* getCleaner() const;
+    void setCleaner(Cleaner* &cleaner);
+    friend istream & operator >> (istream & in, Provider & provider);
 };
 
 #endif // PROVIDER_H
