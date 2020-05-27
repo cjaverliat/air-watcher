@@ -1,5 +1,8 @@
 #include "Actor.h"
 
+Actor::Actor(){
+
+}
 
 Actor::Actor(const string & login,const string & password)
     :_login(login),_password(password)

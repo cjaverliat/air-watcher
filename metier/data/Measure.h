@@ -1,8 +1,12 @@
 #ifndef MEASURE_H
 #define MEASURE_H
 
-#include <time.h>
-#include "Sensor.h"
+#include<ctime>
+
+#include"Sensor.h"
+#include "Catalog.h"
+
+class Catalog;
 
 using namespace std;
 
@@ -15,18 +19,19 @@ protected:
     double _valeurNO2;
     double _valeurPM10;
     time_t _date;
-    Sensor _sensor;
-
+    Sensor* _sensor;
+    Catalog* _catalog;
 public:
-    Measure();
-    Measure(const unsigned int &id, const double &valueO3, const double &valueSO2, const double &valueNO2, const double &valuePM10, const time_t &date, const Sensor &sensor);
+    Measure(Catalog* catalog);
+    Measure(const unsigned int & id, const double & valeurO3, const double & valeurSO2, const double & valeurNO2, const double & valeurPM10, const time_t & date, Sensor* sensor);
     double getValueO3() const;
     double getValueSO2() const;
     double getValueNO2() const;
     double getValuePM10() const;
     time_t getDate() const;
-    Sensor getSensor() const;
+    Sensor* getSensor() const;
     unsigned int getId() const;
+    friend istream & operator >> (istream & in, Measure & measure);
 };
 
 #endif // MEASURE_H

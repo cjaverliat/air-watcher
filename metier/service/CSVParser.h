@@ -10,6 +10,7 @@
 #include "../acteurs/Provider.h"
 #include "../data/Sensor.h"
 #include "../acteurs/PrivateIndividual.h"
+#include "../data/Catalog.h"
 
 class CSVParser {
 
@@ -17,17 +18,17 @@ public:
 
     //static void ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes);
 
-    static void ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners);
+    static void ReadCleanersCSV (const std::string & filename, Catalog & catalog);
 
-    static void ReadMeasuresCSV (const std::string & filename, std::vector<Measure> & measures);
+    static void ReadMeasuresCSV (const std::string & filename, Catalog & catalog);
 
-    static void ReadProvidersCSV (const std::string & filename, std::vector<Provider> & providers);
+    static void ReadProvidersCSV (const std::string & filename, Catalog & catalog);
 
-    static void ReadSensorsCSV (const std::string & filename, std::vector<Sensor> & sensors);
+    static void ReadSensorsCSV (const std::string & filename, Catalog & catalog);
 
-    static void ReadPrivateIndividualsCSV (const std::string & filename, std::vector<PrivateIndividual> & privateIndividuals);
+    static void ReadPrivateIndividualsCSV (const std::string & filename, Catalog & catalog);
 
-    CSVParser (const CSVParser & unCSVParser);
+    CSVParser (const CSVParser & unCSVParser); // Not implemented to prevent unwanted use
 
     CSVParser ();
 
