@@ -49,3 +49,56 @@ void Cleaner::setCoordinates(const Coordinates &coordinates)
 {
     _coordinates = coordinates;
 }
+
+istream & operator >> (istream & in, Cleaner & cleaner)
+{
+    string id;
+    getline(in, id, ';');
+    id = id.substr(7, id.size());
+    cleaner._id = stoi(id);
+
+    string longitude, latitude;
+    getline(in, latitude, ';');
+    getline(in, longitude, ';');
+    cleaner._coordinates = Coordinates(stod(latitude), stod(longitude));
+
+    string description;
+    getline(in, description, ';');
+    cleaner._description = description;
+
+    string year, month, day, hour, minutes, seconds;
+    getline(in, year, '-');
+    getline(in, month, '-');
+    getline(in, day, ' ');
+    getline(in, hour, ':');
+    getline(in, minutes, ':');
+    getline(in, seconds, ';');
+
+    time_t rawtime;
+    time(&rawtime);
+
+    tm *cleanerStart{};
+    cleanerStart = localtime(&rawtime);
+    cleanerStart->tm_year = stoi(year);
+    cleanerStart->tm_mon = stoi(month);
+    cleanerStart->tm_mday = stoi(day);
+    cleanerStart->tm_hour = stoi(hour);
+    cleanerStart->tm_min = stoi(minutes);
+    cleanerStart->tm_sec = stoi(seconds);
+
+    cleaner._cleanerStart = mktime(cleanerStart); // Converts tm struct to time_t
+
+
+    tm *cleanerStop{};
+    cleanerStop = localtime(&rawtime);
+    cleanerStop->tm_year = stoi(year);
+    cleanerStop->tm_mon = stoi(month);
+    cleanerStop->tm_mday = stoi(day);
+    cleanerStop->tm_hour = stoi(hour);
+    cleanerStop->tm_min = stoi(minutes);
+    cleanerStop->tm_sec = stoi(seconds);
+
+    cleaner._cleanerStop = mktime(cleanerStop); // Converts tm struct to time_t
+
+    return in;
+}

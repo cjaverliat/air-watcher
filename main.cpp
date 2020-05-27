@@ -10,8 +10,10 @@
 
 using namespace std;
 
-void SelectPrivateIndividual(Catalog &catalog);
-void SelectProvider(Catalog &catalog);
+static Catalog catalog = Catalog();
+
+void SelectPrivateIndividual();
+void SelectProvider();
 
 void PrivateIndividualView(PrivateIndividual &privateIndividual);
 void ProviderView(Provider &provider);
@@ -29,7 +31,6 @@ int main()
 
     cout << "Chargement des données en cours, veuillez patienter." << endl
          << endl;
-    Catalog catalog = Catalog();
     //TODO Initialiser les données
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
@@ -50,25 +51,25 @@ int main()
         cin >> commande;
         switch (commande)
         {
-        case 1:
-            SelectPrivateIndividual(catalog);
-            break;
-        case 2:
-            SelectProvider(catalog);
-            break;
-        case 3:
-            DeciderView(decider);
-            break;
-        case 4:
-            SuperUserView(superUser);
-            break;
-        case 5:
-            cout << "Fermeture ..." << endl;
-            return 0;
-        default:
-            cerr << "Commande inconnue." << endl;
-            ClearBuffer();
-            break;
+            case 1:
+                SelectPrivateIndividual();
+                break;
+            case 2:
+                SelectProvider();
+                break;
+            case 3:
+                DeciderView(decider);
+                break;
+            case 4:
+                SuperUserView(superUser);
+                break;
+            case 5:
+                cout << "Fermeture ..." << endl;
+                return 0;
+            default:
+                cerr << "Commande inconnue." << endl;
+                ClearBuffer();
+                break;
         }
     }
 
@@ -192,8 +193,7 @@ void SuperUserView(SuperUser &superUser)
     }
 }
 
-void SelectPrivateIndividual(Catalog &catalog)
-{
+void SelectPrivateIndividual() {
     unsigned int commande = 0;
     for (;;)
     {
@@ -219,10 +219,9 @@ void SelectPrivateIndividual(Catalog &catalog)
     }
 }
 
-void SelectProvider(Catalog &catalog)
-{
+void SelectProvider() {
     unsigned int commande = 0;
-    for (;;)
+    for(;;)
     {
         cout << "Choisissez le fournisseur d'AirCleaners souhaité" << endl;
         cout << "-- (0) Sortir" << endl;

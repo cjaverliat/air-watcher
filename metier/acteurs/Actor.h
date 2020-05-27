@@ -12,6 +12,8 @@ protected:
     string _login;
     string _password;
 public:
+
+    Actor();
     Actor(const string & login,const string & password);
     bool connect(const string & login,const string & password);
     bool disconnect();

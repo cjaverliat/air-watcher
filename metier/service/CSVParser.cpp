@@ -16,67 +16,71 @@
 
 } //----- Fin de ReadAttributesCSV*/
 
-void CSVParser::ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners)
+void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog)
 {
+    catalog._cleaners.empty();
     std::ifstream file(filename);
     Cleaner cleaner;
     while(file.good())
     {
         file >> cleaner;
         if(!file.good()) break;
-        cleaners.push_back(cleaner);
+        catalog._cleaners.push_back(cleaner);
     }
-
 } //----- Fin de ReadCleanersCSV
 
-void CSVParser::ReadMeasuresCSV (const std::string & filename, std::vector<Measure> & measures)
+void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog)
 {
+    catalog._measures.empty();
     std::ifstream file(filename);
-    Measure measure;
+    Measure measure(&catalog);
     while(file.good())
     {
         file >> measure;
         if(!file.good()) break;
-        measures.push_back(measure);
+        catalog._measures.push_back(measure);
     }
 
 } //----- Fin de ReadMeasuresCSV
 
-void CSVParser::ReadProvidersCSV (const std::string & filename, std::vector<Provider> & providers)
+void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalog)
 {
+    catalog._providers.empty();
     std::ifstream file(filename);
-    Provider provider;
+    Provider provider(&catalog);
     while(file.good())
     {
         file >> provider;
         if(!file.good()) break;
-        providers.push_back(provider);
+        catalog._providers.push_back(provider);
     }
 
 } //----- Fin de ReadProvidersCSV
 
-void CSVParser::ReadSensorsCSV (const std::string & filename, std::vector<Sensor> & sensors)
+void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
 {
+    catalog._sensors.empty();
     std::ifstream file(filename);
     Sensor sensor;
     while(file.good())
     {
         file >> sensor;
         if(!file.good()) break;
-        sensors.push_back(sensor);
+        catalog._sensors.push_back(sensor);
     }
 
 } //----- Fin de ReadSensorsCSV
 
-void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, std::vector<PrivateIndividual> & privateIndividuals)
+void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, Catalog & catalog)
 {
+    catalog._privateIndividuals.empty();
     std::ifstream file(filename);
-    PrivateIndividual privateIndividual;
+    PrivateIndividual privateIndividual(&catalog);
     while(file.good())
     {
         file >> privateIndividual;
         if(!file.good()) break;
-        privateIndividuals.push_back(privateIndividual);
+        catalog._privateIndividuals.push_back(privateIndividual);
     }
 
 } //----- Fin de ReadPrivateIndividualsCSV

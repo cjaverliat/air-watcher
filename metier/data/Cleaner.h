@@ -27,6 +27,7 @@ public:
     Coordinates getCoordinates() const;
     void setCoordinates(const Coordinates &coordinates);
     unsigned int getId() const;
+    friend istream & operator >> (istream & in, Cleaner & cleaner);
 };
 
 #endif // CLEANER_H
