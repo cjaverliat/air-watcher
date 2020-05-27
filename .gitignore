@@ -41,6 +41,9 @@ cmake-build-debug/*
 CMakeLists.txt
 .idea/*
 
+#nicolas
+src2/*
+
 #vscode
 .vscode
 .history
