@@ -1,4 +1,4 @@
-#include "provider.h"
+#include "Provider.h"
 
 Provider::Provider(const string & email,const string & password, const Cleaner & cleaner)
     :Actor(email,password),_cleaner(cleaner)

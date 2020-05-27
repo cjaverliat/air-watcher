@@ -4,7 +4,7 @@
 #include<iostream>
 #include<string.h>
 #include<time.h>
-#include"coordinates.h"
+#include"Coordinates.h"
 
 using namespace std;
 
@@ -17,6 +17,7 @@ protected:
     time_t _cleanerStop;
     Coordinates _coordinates;
 public:
+    Cleaner();
     Cleaner(const unsigned int & id,const string & description, const time_t & cleanerStart,const time_t & cleanerStop, const Coordinates & coordinates);
     string getDescription() const;
     void setDescription(const string &description);

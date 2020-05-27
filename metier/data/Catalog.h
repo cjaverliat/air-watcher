@@ -1,11 +1,11 @@
 #ifndef CATALOG_H
 #define CATALOG_H
 
-#include"measure.h"
-#include"sensor.h"
-#include"cleaner.h"
-#include"../acteurs/provider.h"
-#include"../acteurs/privateindividual.h"
+#include"Measure.h"
+#include"Sensor.h"
+#include"Cleaner.h"
+#include"../acteurs/Provider.h"
+#include"../acteurs/Privateindividual.h"
 #include<vector>
 
 using namespace std;
@@ -20,6 +20,16 @@ protected:
     vector<PrivateIndividual> _privateIndividuals;
 public:
     Catalog();
+
+    const vector<Cleaner> &getCleaners() const;
+
+    const vector<Measure> &getMeasures() const;
+
+    const vector<Sensor> &getSensors() const;
+
+    const vector<Provider> &getProviders() const;
+
+    const vector<PrivateIndividual> &getPrivateIndividuals() const;
 };
 
 #endif // CATALOG_H

@@ -1,4 +1,8 @@
-#include "measure.h"
+#include "Measure.h"
+
+Measure::Measure() {
+
+}
 
 Measure::Measure(const unsigned int & id, const double &valeurO3, const double &valeurSO2, const double &valeurNO2, const double &valeurPM10, const time_t &date, const Sensor & sensor)
     :_id(id),_valeurO3(valeurO3),_valeurS02(valeurSO2),_valeurNO2(valeurNO2),_valeurPM10(valeurPM10), _date(date), _sensor(sensor)

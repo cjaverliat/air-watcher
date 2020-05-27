@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-void CSVParser::ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes)
+/*void CSVParser::ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes)
 {
     std::ifstream file(filename);
     Attribute attribute;
@@ -14,7 +14,7 @@ void CSVParser::ReadAttributesCSV (const std::string & filename, std::vector<Att
         attributes.push_back(attribute);
     }
 
-} //----- Fin de ReadAttributesCSV
+} //----- Fin de ReadAttributesCSV*/
 
 void CSVParser::ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners)
 {
@@ -68,7 +68,7 @@ void CSVParser::ReadSensorsCSV (const std::string & filename, std::vector<Sensor
 
 } //----- Fin de ReadSensorsCSV
 
-void CSVParser::ReadPrivateIndividualsCSV(const std:: & filename, std::vector<PrivateIndividual> & privateIndividuals)
+void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, std::vector<PrivateIndividual> & privateIndividuals)
 {
     std::ifstream file(filename);
     PrivateIndividual privateIndividual;

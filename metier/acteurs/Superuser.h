@@ -1,7 +1,7 @@
 #ifndef SUPERUSER_H
 #define SUPERUSER_H
 
-#include"actor.h"
+#include"Actor.h"
 
 class SuperUser : public Actor
 {

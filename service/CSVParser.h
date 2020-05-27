@@ -4,18 +4,18 @@
 #include <string>
 #include <vector>
 
-#include "../metier/data/Attribute.h"
+//#include "../metier/data/Attribute.h"
 #include "../metier/data/Cleaner.h"
 #include "../metier/data/Measure.h"
 #include "../metier/acteurs/Provider.h"
 #include "../metier/data/Sensor.h"
-#include "../metier/acteurs/PrivateIndividual.h"
+#include "../metier/acteurs/Privateindividual.h"
 
 class CSVParser {
 
 public:
 
-    static void ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes);
+    //static void ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes);
 
     static void ReadCleanersCSV (const std::string & filename, std::vector<Cleaner> & cleaners);
 

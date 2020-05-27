@@ -1,7 +1,7 @@
 #ifndef DECIDER_H
 #define DECIDER_H
 
-#include"actor.h"
+#include"Actor.h"
 
 class Decider : public Actor
 {

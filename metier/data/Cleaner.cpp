@@ -1,4 +1,8 @@
-#include "cleaner.h"
+#include "Cleaner.h"
+
+Cleaner::Cleaner() {
+
+}
 
 Cleaner::Cleaner(const unsigned int & id, const string &description, const time_t &cleanerStart, const time_t &cleanerStop, const Coordinates & coordinates)
     :_id(id),_description(description),_cleanerStart(cleanerStart),_cleanerStop(cleanerStop),_coordinates(coordinates)

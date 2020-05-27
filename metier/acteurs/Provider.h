@@ -1,8 +1,8 @@
 #ifndef PROVIDER_H
 #define PROVIDER_H
 
-#include"actor.h"
-#include"../data/cleaner.h"
+#include"Actor.h"
+#include"../data/Cleaner.h"
 
 class Provider : public Actor
 {

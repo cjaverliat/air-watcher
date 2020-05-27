@@ -2,7 +2,7 @@
 #define MEASURE_H
 
 #include<time.h>
-#include"sensor.h"
+#include"Sensor.h"
 
 using namespace std;
 
@@ -17,6 +17,7 @@ protected:
     time_t _date;
     Sensor _sensor;
 public:
+    Measure();
     Measure(const unsigned int & id, const double & valeurO3, const double & valeurSO2, const double & valeurNO2, const double & valeurPM10, const time_t & date, const Sensor & sensor);
     double getValeurO3() const;
     double getValeurS02() const;
