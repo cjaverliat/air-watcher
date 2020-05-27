@@ -5,11 +5,11 @@
 #include <vector>
 
 //#include "../metier/data/Attribute.h"
-#include "../metier/data/Cleaner.h"
-#include "../metier/data/Measure.h"
-#include "../metier/acteurs/Provider.h"
-#include "../metier/data/Sensor.h"
-#include "../metier/acteurs/Privateindividual.h"
+#include "../data/Cleaner.h"
+#include "../data/Measure.h"
+#include "../acteurs/Provider.h"
+#include "../data/Sensor.h"
+#include "../acteurs/Privateindividual.h"
 
 class CSVParser {
 
