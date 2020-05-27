@@ -41,3 +41,8 @@ Cleaner* Catalog::getCleanerById(unsigned int cleanerId) {
     }
     return nullptr;
 }
+
+std::map<double, const Sensor *> Catalog::getSensorsAroundCleaner(Cleaner cleaner) {
+    //TODO Implémenter ici
+    return std::map<double, const Sensor *>();
+}

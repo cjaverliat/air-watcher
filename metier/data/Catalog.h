@@ -7,6 +7,7 @@
 #include"../acteurs/Provider.h"
 #include"../acteurs/PrivateIndividual.h"
 #include<vector>
+#include<map>
 
 class Provider;
 class PrivateIndividual;
@@ -39,6 +40,8 @@ public:
     Sensor* getSensorById(unsigned int sensorId);
 
     Cleaner* getCleanerById(unsigned int cleanerId);
+
+    std::map<double, const Sensor *> getSensorsAroundCleaner(Cleaner cleaner);
 
     friend class CSVParser;
 };

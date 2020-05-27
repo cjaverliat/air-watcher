@@ -97,7 +97,7 @@ std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &s
 
     for (const Measure &m : m_catalog.getMeasures())
     {
-        if (sensor.getId() == m.getSensor().getId() && difftime(m.getDate(), startTime) >= 0 && difftime(endTime, m.getDate()) >= 0)
+        if (sensor.getId() == m.getSensor()->getId() && difftime(m.getDate(), startTime) >= 0 && difftime(endTime, m.getDate()) >= 0)
         {
             measures.push_back(&m);
         }
@@ -112,7 +112,7 @@ std::vector<const Measure *> Services::getSensorMeasures(const Sensor &sensor) c
 
     for (const Measure &m : m_catalog.getMeasures())
     {
-        if (sensor.getId() == m.getSensor().getId())
+        if (sensor.getId() == m.getSensor()->getId())
         {
             measures.push_back(&m);
         }
@@ -206,7 +206,7 @@ std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor,
             continue;
         }
 
-        for (auto i = 0; i < std::min(refSensorMeasures.size(), currentSensorMeasures.size()); ++i)
+        for (unsigned i = 0; i < std::min(refSensorMeasures.size(), currentSensorMeasures.size()); ++i)
         {
             const Measure &refMeasure = *refSensorMeasures.at(i);
             const Measure &currentSensorMeasure = *currentSensorMeasures.at(i);

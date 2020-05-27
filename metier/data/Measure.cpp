@@ -93,7 +93,7 @@ istream &operator>>(istream & in, Measure & measure) {
 
     measure._valeurO3 = stod(O3);
     measure._valeurNO2 = stod(NO2);
-    measure._valeurS02 = stod(SO2);
+    measure._valeurSO2 = stod(SO2);
     measure._valeurPM10 = stod(PM10);
 
     return in;
