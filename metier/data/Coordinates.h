@@ -8,7 +8,7 @@ protected:
     double _latitude;
     double _longitude;
 public:
-    Coordinates(const double & latitude, const double & longitude);
+    Coordinates(const double & latitude = 0, const double & longitude = 0);
     double getLatitude() const;
     double getLongitude() const;
     double distanceTo(const Coordinates & coordinates);

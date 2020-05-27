@@ -1,4 +1,4 @@
-#include "actor.h"
+#include "Actor.h"
 
 
 Actor::Actor(const string & login,const string & password)

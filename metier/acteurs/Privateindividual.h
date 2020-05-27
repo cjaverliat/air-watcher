@@ -1,8 +1,8 @@
 #ifndef PRIVATEINDIVIDUAL_H
 #define PRIVATEINDIVIDUAL_H
 
-#include"actor.h"
-#include"../data/sensor.h"
+#include"Actor.h"
+#include"../data/Sensor.h"
 
 class PrivateIndividual : public Actor
 {

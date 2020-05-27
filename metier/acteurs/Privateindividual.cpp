@@ -1,4 +1,4 @@
-#include "privateindividual.h"
+#include "Privateindividual.h"
 
 PrivateIndividual::PrivateIndividual(const string & email,const string & password)
     :Actor(email,password)

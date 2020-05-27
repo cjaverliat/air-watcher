@@ -1,6 +1,6 @@
-#include "coordinates.h"
+#include "Coordinates.h"
 
-Coordinates::Coordinates(const double &latitude, const double &longitude)
+Coordinates::Coordinates(const double &latitude /* = 0 */, const double &longitude /* = 0 */)
     :_latitude(latitude),_longitude(longitude)
 {
 

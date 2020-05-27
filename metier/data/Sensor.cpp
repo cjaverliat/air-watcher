@@ -1,4 +1,4 @@
-#include "sensor.h"
+#include "Sensor.h"
 
 Sensor::Sensor(const unsigned int &id, const string &description, const Coordinates &coordinates)
     :_id(id),_description(description),_coordinates(coordinates)

@@ -3,10 +3,10 @@
 
 #include "service/CSVParser.h"
 #include "metier/data/Catalog.h"
-#include "metier/acteurs/PrivateIndividual.h"
+#include "metier/acteurs/Privateindividual.h"
 #include "metier/acteurs/Provider.h"
 #include "metier/acteurs/Decider.h"
-#include "metier/acteurs/SuperUser.h"
+#include "metier/acteurs/Superuser.h"
 
 using namespace std;
 
@@ -27,10 +27,10 @@ void ClearBuffer()
 int main(){
 
     cout << "Chargement des données en cours, veuillez patienter." << endl << endl;
-    Catalog catalog = new Catalog();
+    Catalog catalog = Catalog();
     //TODO Initialiser les données
-    Decider decider = new Decider();
-    SuperUser superUser = new SuperUser();
+    Decider decider = Decider("Decider", "deciderpassword");
+    SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
     cout << "Les données on bien été chargées." << endl << endl;
 
     int commande = 0;
@@ -84,7 +84,7 @@ void PrivateIndividualView(PrivateIndividual & privateIndividual) {
         switch(commande)
         {
             case 1:
-                cout << "Votre score est de : " << privateIndividual.getScore() << endl;
+                cout << "Votre score est de : " << privateIndividual.getUserScore() << endl;
                 break;
             case 2:
                 cout << "Fermeture ..." << endl;
