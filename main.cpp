@@ -3,10 +3,10 @@
 
 #include "metier/service/CSVParser.h"
 #include "metier/data/Catalog.h"
-#include "metier/acteurs/Privateindividual.h"
+#include "metier/acteurs/PrivateIndividual.h"
 #include "metier/acteurs/Provider.h"
 #include "metier/acteurs/Decider.h"
-#include "metier/acteurs/Superuser.h"
+#include "metier/acteurs/SuperUser.h"
 
 using namespace std;
 

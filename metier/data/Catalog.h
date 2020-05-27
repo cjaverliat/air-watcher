@@ -5,7 +5,7 @@
 #include"Sensor.h"
 #include"Cleaner.h"
 #include"../acteurs/Provider.h"
-#include"../acteurs/Privateindividual.h"
+#include"../acteurs/PrivateIndividual.h"
 #include<vector>
 
 using namespace std;

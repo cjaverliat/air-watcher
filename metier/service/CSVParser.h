@@ -9,7 +9,7 @@
 #include "../data/Measure.h"
 #include "../acteurs/Provider.h"
 #include "../data/Sensor.h"
-#include "../acteurs/Privateindividual.h"
+#include "../acteurs/PrivateIndividual.h"
 
 class CSVParser {
 
