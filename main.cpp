@@ -12,8 +12,8 @@ using namespace std;
 
 static Catalog catalog = Catalog();
 
-void SelectPrivateIndividual(Catalog & catalog);
-void SelectProvider(Catalog & catalog);
+void SelectPrivateIndividual();
+void SelectProvider();
 
 void PrivateIndividualView(PrivateIndividual & privateIndividual);
 void ProviderView(Provider & provider);
@@ -48,10 +48,10 @@ int main(){
         switch(commande)
         {
             case 1:
-                SelectPrivateIndividual(catalog);
+                SelectPrivateIndividual();
                 break;
             case 2:
-                SelectProvider(catalog);
+                SelectProvider();
                 break;
             case 3:
                 DeciderView(decider);
@@ -181,7 +181,7 @@ void SuperUserView(SuperUser & superUser) {
     }
 }
 
-void SelectPrivateIndividual(Catalog & catalog) {
+void SelectPrivateIndividual() {
     unsigned commande = 0;
     for(;;)
     {
@@ -206,7 +206,7 @@ void SelectPrivateIndividual(Catalog & catalog) {
     }
 }
 
-void SelectProvider(Catalog &catalog) {
+void SelectProvider() {
     unsigned commande = 0;
     for(;;)
     {
