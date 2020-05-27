@@ -10,13 +10,17 @@ const unsigned int idxLevelsSO2[9] = {39, 79, 119, 159, 199, 249, 299, 399, 499}
 const unsigned int idxLevelsNO2[9] = {29, 54, 84, 109, 134, 164, 199, 274, 399};
 const unsigned int idxLevelsPM10[9] = {6, 13, 20, 27, 34, 41, 49, 64, 79};
 
+using namespace std;
+
+//TODO: S'assurer que les mesures sont triées par ordre chronologique pour optimiser les algos
+
 Services::Services(Catalog &catalog) : m_catalog(catalog)
 {
 }
 
-unsigned int Services::computeATMOIndex(const Measure &measure) const
+int Services::computeATMOIndex(const Measure &measure) const
 {
-    unsigned int atmoIdx = 1;
+    int atmoIdx = 1;
     const unsigned int *idxLevels;
 
     double maxConcentration = 0;
@@ -73,13 +77,12 @@ double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2)
 
 const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) const
 {
-    assert(std::is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end()));
-
-    for (const Measure &m : m_catalog.getMeasures())
+    //Parcourt en sens inverse
+    for (auto it = m_catalog.getMeasures().end() - 1; it >= m_catalog.getMeasures().begin(); --it)
     {
-        if (sensor == m.getSensor())
+        if (it->getDate() <= t)
         {
-            return &m;
+            return &(*it);
         }
     }
 
@@ -89,13 +92,12 @@ const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) co
 std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &sensor, time_t startTime, time_t endTime) const
 {
     assert(difftime(endTime, startTime) >= 0);
-    assert(std::is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end()));
 
     std::vector<const Measure *> measures;
 
     for (const Measure &m : m_catalog.getMeasures())
     {
-        if (sensor == m.getSensor() && difftime(m.getDate(), startTime) >= 0 && difftime(endTime, m.getDate()) >= 0)
+        if (sensor.getId() == m.getSensor().getId() && difftime(m.getDate(), startTime) >= 0 && difftime(endTime, m.getDate()) >= 0)
         {
             measures.push_back(&m);
         }
@@ -110,7 +112,7 @@ std::vector<const Measure *> Services::getSensorMeasures(const Sensor &sensor) c
 
     for (const Measure &m : m_catalog.getMeasures())
     {
-        if (sensor == m.getSensor())
+        if (sensor.getId() == m.getSensor().getId())
         {
             measures.push_back(&m);
         }
@@ -185,16 +187,14 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
 
 std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor, double epsilonATMOIndex, double epsilonTime) const
 {
-    assert(std::is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end()));
-
     std::vector<const Sensor *> similarSensors;
 
+    //TODO: Liste supposée triée
     std::vector<const Measure *> refSensorMeasures = getSensorMeasures(refSensor);
-    assert(std::is_sorted(refSensorMeasures.begin(), refSensorMeasures.end()));
 
     for (const Sensor &sensor : m_catalog.getSensors())
     {
-        if (sensor == refSensor)
+        if (sensor.getId() == refSensor.getId())
             continue;
 
         bool similarMeasures = true;
@@ -285,21 +285,21 @@ std::pair<std::string, double> Services::getZoneCaracteristicAttribute(const Coo
     }
 }
 
-std::pair<double, double> Services::computeAirCleanerImpact(const AirCleaner &airCleaner) const
+std::pair<double, double> Services::computeCleanerImpact(const Cleaner &cleaner) const
 {
     unsigned int improvementsSum = 0;
     unsigned int nbImprovements = 0;
     double impactRadius = 0;
 
     //Sorted by increasing distance
-    std::map<double, const Sensor *> sensorsAround = m_catalog.getSensorsAroundAirCleaner(airCleaner);
+    std::map<double, const Sensor *> sensorsAround = m_catalog.getSensorsAroundCleaner(cleaner);
 
-    for (auto &mapEntry : m_catalog.getSensorsAroundAirCleaner(airCleaner))
+    for (auto &mapEntry : m_catalog.getSensorsAroundCleaner(cleaner))
     {
         double distance = mapEntry.first; //Distance between the sensor and the air cleaner
         const Sensor &sensor = *mapEntry.second;
 
-        unsigned int idxATMOBefore = computeATMOIndex(*getLastSensorMeasure(sensor, airCleaner.getCleanerStart()));
+        unsigned int idxATMOBefore = computeATMOIndex(*getLastSensorMeasure(sensor, cleaner.getCleanerStart()));
         unsigned int idxATMOAfter = computeATMOIndex(*getLastSensorMeasure(sensor, time(0)));
 
         if (idxATMOAfter > idxATMOBefore)

@@ -6,11 +6,11 @@
 #include <utility>
 #include <map>
 
-#include "Measure.h"
-#include "Coordinates.h"
-#include "Sensor.h"
-#include "Catalog.h"
-#include "AirCleaner.h"
+#include "../data/Measure.h"
+#include "../data/Coordinates.h"
+#include "../data/Sensor.h"
+#include "../data/Catalog.h"
+#include "../data/Cleaner.h"
 
 class Services
 {
@@ -30,7 +30,7 @@ public:
      * @param measure The measure containing the concentration of O3, SO2, NO2 and PM10 to compute the index.
      * @return The ATMO index, between 1 and 10.
      */
-    unsigned int computeATMOIndex(const Measure &measure) const;
+    int computeATMOIndex(const Measure &measure) const;
 
     /**
      * @brief Compute the Haversine distance between two coordinates
@@ -103,7 +103,7 @@ public:
      * @param epsilonTime Epsilon used to check if the difference of time of a reference measure and another sensor's measure is small enough.
      * @return The list of all sensors similar to the reference sensor.
      */
-    std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor, double epsilonATMOIndex, double epsilonTime) const;
+    std::vector<const Sensor *> getSimilarSensors(const Sensor &refSensor, double epsilonATMOIndex, double epsilonTime) const;
 
     /**
      * @brief Get the zone caracteristic attribute
@@ -118,8 +118,8 @@ public:
     /**
      * @brief Compute the impact of an air cleaner
      * 
-     * @param airCleaner The air cleaner to compute the impact of.
+     * @param cleaner The air cleaner to compute the impact of.
      * @return A pair consisting of the impact radius and the average ATMO index improvement.
      */
-    std::pair<double, double> computeAirCleanerImpact(const AirCleaner &airCleaner) const;
+    std::pair<double, double> computeCleanerImpact(const Cleaner &cleaner) const;
 };
