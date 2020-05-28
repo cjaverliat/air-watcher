@@ -44,6 +44,8 @@ CMakeLists.txt
 #nicolas
 src2/*
 
+build/
+
 #vscode
 .vscode
 .history
