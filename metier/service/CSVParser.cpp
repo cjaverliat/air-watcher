@@ -18,7 +18,7 @@
 
 void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog)
 {
-    catalog._cleaners.empty();
+    catalog._cleaners.clear();
     std::ifstream file(filename);
     Cleaner cleaner;
     while(file.good())
@@ -31,7 +31,7 @@ void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog
 
 void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog)
 {
-    catalog._measures.empty();
+    catalog._measures.clear();
     std::ifstream file(filename);
     Measure measure(&catalog);
     while(file.good())
@@ -45,7 +45,7 @@ void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog
 
 void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalog)
 {
-    catalog._providers.empty();
+    catalog._providers.clear();
     std::ifstream file(filename);
     Provider provider(&catalog);
     while(file.good())
@@ -59,7 +59,7 @@ void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalo
 
 void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
 {
-    catalog._sensors.empty();
+    catalog._sensors.clear();
     std::ifstream file(filename);
     Sensor sensor;
     while(file.good())
@@ -73,7 +73,7 @@ void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
 
 void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, Catalog & catalog)
 {
-    catalog._privateIndividuals.empty();
+    catalog._privateIndividuals.clear();
     std::ifstream file(filename);
     PrivateIndividual privateIndividual(&catalog);
     while(file.good())
