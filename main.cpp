@@ -12,6 +12,8 @@ using namespace std;
 
 static Catalog catalog = Catalog();
 
+void loadData();
+
 void SelectPrivateIndividual();
 void SelectProvider();
 
@@ -31,10 +33,12 @@ int main()
 
     cout << "Chargement des données en cours, veuillez patienter." << endl
          << endl;
-    //TODO Initialiser les données
+
+    loadData();
+
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
-    cout << "Les données on bien été chargées." << endl
+    cout << "Les données ont bien été chargées." << endl
          << endl;
 
     unsigned int commande = 0;
@@ -74,6 +78,14 @@ int main()
     }
 
     return 0;
+}
+
+void loadData() {
+    CSVParser::ReadSensorsCSV("resources/sensors.csv", catalog);
+    CSVParser::ReadCleanersCSV("resources/cleaners.csv", catalog);
+    CSVParser::ReadMeasuresCSV("resources/measurements.csv", catalog);
+    CSVParser::ReadPrivateIndividualsCSV("resources/users.csv", catalog);
+    CSVParser::ReadProvidersCSV("resources/providers.csv", catalog);
 }
 
 void PrivateIndividualView(PrivateIndividual &privateIndividual)
