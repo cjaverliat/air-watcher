@@ -20,6 +20,12 @@ void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog
 {
     catalog._cleaners.clear();
     std::ifstream file(filename);
+
+    if(!file.is_open()) {
+        cerr << "Erreur d'ouverture du fichier " << filename << endl;
+        exit (1);
+    }
+
     Cleaner cleaner;
     while(file.good())
     {
@@ -33,6 +39,12 @@ void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog
 {
     catalog._measures.clear();
     std::ifstream file(filename);
+
+    if(!file.is_open()) {
+        cerr << "Erreur d'ouverture du fichier " << filename << endl;
+        exit (1);
+    }
+
     Measure measure(&catalog);
     while(file.good())
     {
@@ -47,6 +59,12 @@ void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalo
 {
     catalog._providers.clear();
     std::ifstream file(filename);
+
+    if(!file.is_open()) {
+        cerr << "Erreur d'ouverture du fichier " << filename << endl;
+        exit (1);
+    }
+
     Provider provider(&catalog);
     while(file.good())
     {
@@ -61,6 +79,12 @@ void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
 {
     catalog._sensors.clear();
     std::ifstream file(filename);
+
+    if(!file.is_open()) {
+        cerr << "Erreur d'ouverture du fichier " << filename << endl;
+        exit (1);
+    }
+
     Sensor sensor;
     while(file.good())
     {
@@ -75,6 +99,12 @@ void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, Catalog 
 {
     catalog._privateIndividuals.clear();
     std::ifstream file(filename);
+
+    if(!file.is_open()) {
+        cerr << "Erreur d'ouverture du fichier " << filename << endl;
+        exit (1);
+    }
+
     PrivateIndividual privateIndividual(&catalog);
     while(file.good())
     {
