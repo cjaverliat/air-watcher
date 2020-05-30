@@ -39,6 +39,7 @@ set(HEADERS
         ${PROJECT_SOURCE_DIR}/metier/acteurs/SuperUser.h
         )
 
-message(${SOURCES})
+# Copy resources
+file(COPY ${PROJECT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(airwatcher ${SOURCES} ${HEADERS})
