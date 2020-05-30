@@ -1,4 +1,5 @@
 #include "Cleaner.h"
+#include "../../utils/Utils.h"
 
 Cleaner::Cleaner() {
 
@@ -60,7 +61,7 @@ istream & operator >> (istream & in, Cleaner & cleaner)
     string longitude, latitude;
     getline(in, latitude, ';');
     getline(in, longitude, ';');
-    cleaner._coordinates = Coordinates(stod(latitude), stod(longitude));
+    cleaner._coordinates = Coordinates(toRadians(stod(latitude)), toRadians(stod(longitude)));
 
     string description;
     getline(in, description, ';');

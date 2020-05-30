@@ -1,5 +1,7 @@
 #include "Sensor.h"
 
+#include "../../utils/Utils.h"
+
 Sensor::Sensor(){
 
 }
@@ -45,7 +47,7 @@ istream & operator>>(istream & in, Sensor & sensor) {
     sensorId = sensorId.substr(6, sensorId.size() - 6);
 
     sensor._id = stoi(sensorId);
-    sensor._coordinates = Coordinates(stod(latitude), stod(longitude));
+    sensor._coordinates = Coordinates(toRadians(stod(latitude)), toRadians(stod(longitude)));
     sensor._description = description;
 
     return in;
