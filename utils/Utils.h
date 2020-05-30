@@ -3,8 +3,6 @@
 
 #include <cmath>
 
-double toRadians(double degrees) {
-    return M_PI / 180 * degrees;
-}
+double toRadians(double degrees);
 
 #endif //AIRWATCHER_UTILS_H

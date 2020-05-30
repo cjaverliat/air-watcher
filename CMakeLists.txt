@@ -22,7 +22,7 @@ set(SOURCES
         ${PROJECT_SOURCE_DIR}/metier/acteurs/PrivateIndividual.cpp
         ${PROJECT_SOURCE_DIR}/metier/acteurs/Provider.cpp
         ${PROJECT_SOURCE_DIR}/metier/acteurs/SuperUser.cpp
-        )
+        ${PROJECT_SOURCE_DIR}/utils/Utils.cpp)
 
 set(HEADERS
         ${PROJECT_SOURCE_DIR}/metier/service/CSVParser.h
@@ -39,7 +39,7 @@ set(HEADERS
         ${PROJECT_SOURCE_DIR}/metier/acteurs/PrivateIndividual.h
         ${PROJECT_SOURCE_DIR}/metier/acteurs/Provider.h
         ${PROJECT_SOURCE_DIR}/metier/acteurs/SuperUser.h
-        utils/Utils.h)
+        ${PROJECT_SOURCE_DIR}/utils/Utils.h)
 
 # Copy resources
 file(COPY ${PROJECT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
