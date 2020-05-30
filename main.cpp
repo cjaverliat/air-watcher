@@ -2,9 +2,6 @@
 #include <limits>
 
 #include "metier/service/CSVParser.h"
-#include "metier/data/Catalog.h"
-#include "metier/acteurs/PrivateIndividual.h"
-#include "metier/acteurs/Provider.h"
 #include "metier/acteurs/Decider.h"
 #include "metier/acteurs/SuperUser.h"
 
@@ -31,13 +28,14 @@ void ClearBuffer()
 int main()
 {
 
-    cout << "Chargement des données en cours, veuillez patienter." << endl << endl;
+    cout << "Chargement des données en cours, veuillez patienter." << endl;
 
     loadData();
 
+    cout << "\r " << endl << "Les données ont bien été chargées." << endl << endl;
+
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
-    cout << endl << "Les données ont bien été chargées." << endl << endl;
 
     unsigned int commande = 0;
     cout << "Avec quel compte voulez-vous vous connecter ?" << endl
