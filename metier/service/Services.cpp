@@ -66,7 +66,7 @@ int Services::computeATMOIndex(const Measure &measure) const
 
 double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2) const
 {
-    int r = 6371e3; //Earth radius in meters
+    int r = 6371; //Earth radius in kilometers
     double alpha = (c2.getLatitude() - c1.getLatitude()) / 2;
     double beta = (c2.getLongitude() - c1.getLongitude()) / 2;
     double distance = 2 * r * asin(sqrt(pow(sin(alpha), 2) + cos(c1.getLatitude()) * cos(c2.getLatitude()) * pow(sin(beta), 2)));
