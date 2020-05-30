@@ -31,15 +31,13 @@ void ClearBuffer()
 int main()
 {
 
-    cout << "Chargement des données en cours, veuillez patienter." << endl
-         << endl;
+    cout << "Chargement des données en cours, veuillez patienter." << endl << endl;
 
     loadData();
 
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
-    cout << "Les données ont bien été chargées." << endl
-         << endl;
+    cout << endl << "Les données ont bien été chargées." << endl << endl;
 
     unsigned int commande = 0;
     cout << "Avec quel compte voulez-vous vous connecter ?" << endl

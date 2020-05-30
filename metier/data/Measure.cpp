@@ -69,8 +69,8 @@ istream &operator>>(istream & in, Measure & measure) {
     measure._date = mktime(date); // Converts tm struct to time_t
 
     string sensorId;
-    getline(in, seconds, ';');
-    sensorId = sensorId.substr(6, sensorId.size());
+    getline(in, sensorId, ';');
+    sensorId = sensorId.substr(6, sensorId.size() - 6);
 
     measure._sensor = measure._catalog->getSensorById(stoi(sensorId));
 

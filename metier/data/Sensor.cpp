@@ -42,7 +42,7 @@ istream & operator>>(istream & in, Sensor & sensor) {
     getline(in, longitude, ';');
     getline(in, description, '\n');
 
-    sensorId = sensorId.substr(6, sensorId.size());
+    sensorId = sensorId.substr(6, sensorId.size() - 6);
 
     sensor._id = stoi(sensorId);
     sensor._coordinates = Coordinates(stod(latitude), stod(longitude));

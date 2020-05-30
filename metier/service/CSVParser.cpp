@@ -1,6 +1,8 @@
 #include "CSVParser.h"
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <sstream>
 
 /*void CSVParser::ReadAttributesCSV (const std::string & filename, std::vector<Attribute> & attributes)
 {
@@ -18,6 +20,8 @@
 
 void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog)
 {
+    cout << "Lecture des cleaners... " << flush;
+
     catalog._cleaners.clear();
     std::ifstream file(filename);
 
@@ -27,16 +31,25 @@ void CSVParser::ReadCleanersCSV (const std::string & filename, Catalog & catalog
     }
 
     Cleaner cleaner;
-    while(file.good())
-    {
-        file >> cleaner;
-        if(!file.good()) break;
-        catalog._cleaners.push_back(cleaner);
+    string lineInput;
+
+    while(file.good()) {
+        getline(file, lineInput, '\n');
+
+        if (!lineInput.empty()) {
+            stringstream ss(lineInput + '\n');
+            ss >> cleaner;
+            catalog._cleaners.push_back(cleaner);
+        }
     }
+
+    cout << "OK" << endl;
 } //----- Fin de ReadCleanersCSV
 
 void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog)
 {
+    cout << "Lecture des mesures... " << flush;
+
     catalog._measures.clear();
     std::ifstream file(filename);
 
@@ -46,17 +59,38 @@ void CSVParser::ReadMeasuresCSV (const std::string & filename, Catalog & catalog
     }
 
     Measure measure(&catalog);
-    while(file.good())
-    {
-        file >> measure;
-        if(!file.good()) break;
-        catalog._measures.push_back(measure);
+    string lineInput;
+    bool invalidEntry;
+
+    // Lecture de 4 lignes d'un coup (O3, NO2, SO2, PM10)
+
+    while(file.good()) {
+        stringstream ss;
+        invalidEntry = false;
+
+        for(unsigned i = 0; i < 4; ++i) {
+            getline(file, lineInput, '\n');
+            if (!lineInput.empty()) {
+                ss << lineInput + '\n';
+            } else {
+                invalidEntry = true;
+                break;
+            }
+        }
+
+        if(!invalidEntry) {
+            ss >> measure;
+            catalog._measures.push_back(measure);
+        }
     }
 
+    cout << "OK" << endl;
 } //----- Fin de ReadMeasuresCSV
 
 void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalog)
 {
+    cout << "Lecture des providers... " << flush;
+
     catalog._providers.clear();
     std::ifstream file(filename);
 
@@ -66,17 +100,26 @@ void CSVParser::ReadProvidersCSV (const std::string & filename, Catalog & catalo
     }
 
     Provider provider(&catalog);
-    while(file.good())
-    {
-        file >> provider;
-        if(!file.good()) break;
-        catalog._providers.push_back(provider);
+    string lineInput;
+
+    while(file.good()) {
+        getline(file, lineInput, '\n');
+
+        if (!lineInput.empty()) {
+            stringstream ss(lineInput + '\n');
+            ss >> provider;
+            catalog._providers.push_back(provider);
+        }
     }
+
+    cout << "OK" << endl;
 
 } //----- Fin de ReadProvidersCSV
 
 void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
 {
+    cout << "Lecture des sensors... " << flush;
+
     catalog._sensors.clear();
     std::ifstream file(filename);
 
@@ -86,17 +129,27 @@ void CSVParser::ReadSensorsCSV (const std::string & filename, Catalog & catalog)
     }
 
     Sensor sensor;
+    string lineInput;
+
     while(file.good())
     {
-        file >> sensor;
-        if(!file.good()) break;
-        catalog._sensors.push_back(sensor);
+        getline(file, lineInput, '\n');
+
+        if(!lineInput.empty()) {
+            stringstream ss(lineInput + '\n');
+            ss >> sensor;
+            catalog._sensors.push_back(sensor);
+        }
     }
+
+    cout << "OK" << endl;
 
 } //----- Fin de ReadSensorsCSV
 
 void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, Catalog & catalog)
 {
+    cout << "Lecture des private individuals... " << flush;
+
     catalog._privateIndividuals.clear();
     std::ifstream file(filename);
 
@@ -106,12 +159,19 @@ void CSVParser::ReadPrivateIndividualsCSV(const std::string & filename, Catalog 
     }
 
     PrivateIndividual privateIndividual(&catalog);
-    while(file.good())
-    {
-        file >> privateIndividual;
-        if(!file.good()) break;
-        catalog._privateIndividuals.push_back(privateIndividual);
+    string lineInput;
+
+    while(file.good()) {
+        getline(file, lineInput, '\n');
+
+        if (!lineInput.empty()) {
+            stringstream ss(lineInput + '\n');
+            ss >> privateIndividual;
+            catalog._privateIndividuals.push_back(privateIndividual);
+        }
     }
+
+    cout << "OK" << endl;
 
 } //----- Fin de ReadPrivateIndividualsCSV
 
