@@ -80,7 +80,7 @@ const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) co
     //Parcourt en sens inverse
     for (auto it = m_catalog.getMeasures().end() - 1; it >= m_catalog.getMeasures().begin(); --it)
     {
-        if (it->getDate() <= t)
+        if (it->getSensor()->getId() == sensor.getId() && it->getDate() <= t)
         {
             return &(*it);
         }
