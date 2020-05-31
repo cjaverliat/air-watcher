@@ -154,7 +154,7 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
     }
     else
     {
-        cout << "Aucune donnée disponible avant ce moment dans cette zone." << endl;
+        cout << "Aucune donnée disponible avec des paramètres choisis." << endl;
         return -1;
     }
 }
