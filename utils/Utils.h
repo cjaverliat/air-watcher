@@ -5,4 +5,6 @@
 
 double toRadians(double degrees);
 
+time_t toEpoch(int year, int month, int day, int hours, int minutes, int seconds);
+
 #endif //AIRWATCHER_UTILS_H
