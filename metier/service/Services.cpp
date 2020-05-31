@@ -77,6 +77,8 @@ double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2)
 
 const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) const
 {
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
+
     //Parcourt en sens inverse
     for (auto it = m_catalog.getMeasures().end() - 1; it >= m_catalog.getMeasures().begin(); --it)
     {
@@ -92,6 +94,7 @@ const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) co
 std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &sensor, time_t startTime, time_t endTime) const
 {
     assert(difftime(endTime, startTime) >= 0);
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
 
     std::vector<const Measure *> measures;
 
@@ -108,6 +111,8 @@ std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &s
 
 std::vector<const Measure *> Services::getSensorMeasures(const Sensor &sensor) const
 {
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
+
     std::vector<const Measure *> measures;
 
     for (const Measure &m : m_catalog.getMeasures())
@@ -144,10 +149,12 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
 
     if (n > 0)
     {
+        cout << "Moyenne sur les dernières données de " << n << " capteur(s)." << endl;
         return idxSum / n;
     }
     else
     {
+        cout << "Aucune donnée disponible avant ce moment dans cette zone." << endl;
         return -1;
     }
 }
@@ -158,10 +165,12 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
 
     unsigned int idxSum = 0;
     double n = 0;
+    double nSensors = 0;
 
     for (const Sensor &sensor : m_catalog.getSensors())
     {
         double d = haversineDistance(zoneCenter, sensor.getCoordinates());
+        bool used = false;
 
         if (d <= zoneRadius)
         {
@@ -171,16 +180,23 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
             {
                 idxSum += computeATMOIndex(*m);
                 ++n;
+                used = true;
             }
+        }
+
+        if(used) {
+            ++nSensors;
         }
     }
 
     if (n > 0)
     {
+        cout << n << " donnée(s) utilisée(s), utilisant " << nSensors << " capteur(s)." << endl;
         return idxSum / n;
     }
     else
     {
+        cout << "Aucune donnée disponible à ce moment dans cette zone." << endl;
         return -1;
     }
 }

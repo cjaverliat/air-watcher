@@ -1,5 +1,7 @@
 #include "Measure.h"
 
+#include "../../utils/Utils.h"
+
 Measure::Measure(Catalog* catalog)
     :_catalog(catalog){
 
@@ -54,19 +56,7 @@ istream &operator>>(istream & in, Measure & measure) {
     getline(in, minutes, ':');
     getline(in, seconds, ';');
 
-    time_t rawtime;
-    time(&rawtime);
-
-    tm *date{};
-    date = localtime(&rawtime);
-    date->tm_year = stoi(year);
-    date->tm_mon = stoi(month);
-    date->tm_mday = stoi(day);
-    date->tm_hour = stoi(hour);
-    date->tm_min = stoi(minutes);
-    date->tm_sec = stoi(seconds);
-
-    measure._date = mktime(date); // Converts tm struct to time_t
+    measure._date = toEpoch(stoi(year), stoi(month), stoi(day), stoi(hour), stoi(minutes), stoi(seconds));
 
     string sensorId;
     getline(in, sensorId, ';');
@@ -97,4 +87,8 @@ istream &operator>>(istream & in, Measure & measure) {
     measure._valeurPM10 = stod(PM10);
 
     return in;
+}
+
+bool Measure::dateComparator(const Measure &m1, const Measure &m2) {
+    return m1.getDate() < m2.getDate();
 }

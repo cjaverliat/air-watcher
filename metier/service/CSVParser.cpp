@@ -120,6 +120,9 @@ void CSVParser::ReadMeasuresCSV(const std::string &filename, Catalog &catalog) {
         }
     }
 
+    //Sort measures by timestamp
+    sort(catalog._measures.begin(), catalog._measures.end(), Measure::dateComparator);
+
 } //----- Fin de ReadMeasuresCSV
 
 void CSVParser::ReadProvidersCSV(const std::string &filename, Catalog &catalog) {
