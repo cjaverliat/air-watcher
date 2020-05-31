@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <chrono>
+#include <iomanip>
 
 #include "metier/service/CSVParser.h"
 #include "metier/acteurs/Decider.h"
@@ -33,9 +34,11 @@ int main()
 
     cout << "Chargement des données en cours, veuillez patienter." << endl;
 
+    clock_t loadStart = clock();
     loadData();
+    double duration = double(clock() - loadStart) / CLOCKS_PER_SEC;
 
-    cout << "\r " << endl << "Les données ont bien été chargées." << endl << endl;
+    cout << "\r " << endl << "Données chargées avec succès en " << setprecision(4) << duration << "s." << endl << endl;
 
     Decider decider = Decider("Decider", "deciderpassword");
     SuperUser superUser = SuperUser("SuperUser", "superuserpassword");
