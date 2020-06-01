@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(airwatcher)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-Wall -Werror -Wfatal-errors")
+set(CMAKE_CXX_FLAGS "-Wall -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 

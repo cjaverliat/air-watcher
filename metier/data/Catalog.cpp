@@ -1,4 +1,5 @@
 #include "Catalog.h"
+#include <algorithm>
 
 Catalog::Catalog()
 {
@@ -42,7 +43,17 @@ Cleaner* Catalog::getCleanerById(unsigned int cleanerId) {
     return nullptr;
 }
 
-std::map<double, const Sensor *> Catalog::getSensorsAroundCleaner(Cleaner cleaner) {
-    //TODO Implémenter ici
-    return std::map<double, const Sensor *>();
+std::vector<std::pair<double, const Sensor *>> Catalog::getSensorsAroundCleaner(const Cleaner &cleaner) {
+    std::vector<std::pair<double, const Sensor *>> sensorsAround;
+    for (unsigned i(0); i < _sensors.size(); ++i){
+        unsigned d = haversineDistance(cleaner.getCoordinates(),_sensors[i].getCoordinates());
+        sensorsAround.push_back( std::pair<double, const Sensor *>(d,&_sensors[i]) );
+    }
+    sort(sensorsAround.begin(), sensorsAround.end(), this->comparePair);
+    return sensorsAround;
+}
+
+bool Catalog::comparePair(const std::pair<double, const Sensor *> &p1, const std::pair<double, const Sensor *> &p2)
+{
+    return (p1.first < p2.first);
 }

@@ -6,6 +6,7 @@
 #include"Cleaner.h"
 #include"../acteurs/Provider.h"
 #include"../acteurs/PrivateIndividual.h"
+#include"../../utils/Utils.h"
 #include<vector>
 #include<map>
 
@@ -41,9 +42,11 @@ public:
 
     Cleaner* getCleanerById(unsigned int cleanerId);
 
-    std::map<double, const Sensor *> getSensorsAroundCleaner(Cleaner cleaner);
+    std::vector<std::pair<double, const Sensor *>> getSensorsAroundCleaner(const Cleaner &cleaner);
 
     friend class CSVParser;
+
+    static bool comparePair(const std::pair<double, const Sensor *>  &p1, const std::pair<double, const Sensor *>  &p2);
 };
 
 #endif // CATALOG_H
