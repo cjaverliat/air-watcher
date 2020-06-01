@@ -1,7 +1,7 @@
 #include "PrivateIndividual.h"
 
 PrivateIndividual::PrivateIndividual(Catalog* catalog)
-    : _catalog(catalog){
+    : _userScore(0), _catalog(catalog) {
 
 }
 
