@@ -51,14 +51,18 @@ int main()
     for (;;)
     {
         cout << "Menu :" << endl
+             << "-- (0) Sortir" << endl
              << "-- (1) Individu privé" << endl
              << "-- (2) Fournisseur d'AirCleaner" << endl
              << "-- (3) Agence Gouvernementale" << endl
-             << "-- (4) Administrateur (SuperUser)" << endl
-             << "-- (5) Sortir" << endl;
+             << "-- (4) Administrateur (SuperUser)" << endl;
+
         cin >> commande;
         switch (commande)
         {
+            case 0:
+                cout << "Fermeture ..." << endl;
+                return 0;
             case 1:
                 SelectPrivateIndividual();
                 break;
@@ -71,9 +75,6 @@ int main()
             case 4:
                 SuperUserView(superUser);
                 break;
-            case 5:
-                cout << "Fermeture ..." << endl;
-                return 0;
             default:
                 cerr << "Commande inconnue." << endl;
                 ClearBuffer();
@@ -101,17 +102,18 @@ void PrivateIndividualView(PrivateIndividual &privateIndividual)
     for (;;)
     {
         cout << "Menu :" << endl
-             << "-- (1) Voir mon score" << endl
-             << "-- (2) Sortir" << endl;
+             << "-- (0) Sortir" << endl
+             << "-- (1) Voir mon score" << endl;
+
         cin >> commande;
         switch (commande)
         {
+        case 0:
+            cout << "Fermeture ..." << endl;
+            return;
         case 1:
             cout << "Votre score est de : " << privateIndividual.getUserScore() << endl;
             break;
-        case 2:
-            cout << "Fermeture ..." << endl;
-            return;
         default:
             cerr << "Commande inconnue." << endl;
             ClearBuffer();
@@ -131,17 +133,19 @@ void ProviderView(Provider &provider)
     for (;;)
     {
         cout << "Menu :" << endl
-             << "-- (1) Analyser l'impact de mes AirCleaners" << endl
-             << "-- (2) Sortir" << endl;
+             << "-- (0) Sortir" << endl
+             << "-- (1) Analyser l'impact de mes AirCleaners" << endl;
+
         cin >> commande;
         switch (commande)
         {
+        case 0:
+            cout << "Fermeture ..." << endl;
+            return;
         case 1:
             AnalyseImpact(*(cleaner));
             break;
-        case 2:
-            cout << "Fermeture ..." << endl;
-            return;
+
         default:
             cerr << "Commande inconnue." << endl;
             ClearBuffer();
@@ -257,12 +261,16 @@ void DeciderView(Decider &decider)
     for (;;)
     {
         cout << "Menu :" << endl
+             << "-- (0) Sortir" << endl
              << "-- (1) Calculer l'indice ATMO moyen dans une zone " << endl
-             << "-- (2) Identifier les capteurs similaires " << endl
-             << "-- (3) Sortir" << endl;
+             << "-- (2) Identifier les capteurs similaires " << endl;
+
         cin >> commande;
         switch (commande)
         {
+        case 0:
+            cout << "Fermeture ..." << endl;
+            return;
         case 1: {
             getMeanAirQuality();
             break;
@@ -270,9 +278,7 @@ void DeciderView(Decider &decider)
         case 2:
             //TODO Identifier les capteurs similaires
             break;
-        case 3:
-            cout << "Fermeture ..." << endl;
-            return;
+
         default:
             cerr << "Commande inconnue." << endl;
             ClearBuffer();
@@ -290,17 +296,18 @@ void SuperUserView(SuperUser &superUser)
     for (;;)
     {
         cout << "Menu :" << endl
-             << "-- (1) Mesurer la performance algorithmique" << endl
-             << "-- (2) Sortir" << endl;
+             << "-- (0) Sortir" << endl
+             << "-- (1) Mesurer la performance algorithmique" << endl;
+
         cin >> commande;
         switch (commande)
         {
+        case 0:
+            cout << "Fermeture ..." << endl;
+            return;
         case 1:
             //TODO Mesurer la performance
             break;
-        case 2:
-            cout << "Fermeture ..." << endl;
-            return;
         default:
             cerr << "Commande inconnue." << endl;
             ClearBuffer();
