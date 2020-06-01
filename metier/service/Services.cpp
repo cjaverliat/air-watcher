@@ -62,17 +62,6 @@ int Services::computeATMOIndex(const Measure &measure) const
     return atmoIdx;
 }
 
-double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2) const
-{
-    int r = 6371; //Earth radius in kilometers
-    double alpha = (c2.getLatitude() - c1.getLatitude()) / 2;
-    double beta = (c2.getLongitude() - c1.getLongitude()) / 2;
-    double distance = 2 * r * asin(sqrt(pow(sin(alpha), 2) + cos(c1.getLatitude()) * cos(c2.getLatitude()) * pow(sin(beta), 2)));
-
-    assert(distance >= 0);
-    return distance;
-}
-
 const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) const
 {
     assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
@@ -305,15 +294,19 @@ std::pair<double, double> Services::computeCleanerImpact(const Cleaner &cleaner)
     double impactRadius = 0;
 
     //Sorted by increasing distance
-    std::map<double, const Sensor *> sensorsAround = m_catalog.getSensorsAroundCleaner(cleaner);
+    std::vector<std::pair<double, const Sensor *>> sensorsAround = m_catalog.getSensorsAroundCleaner(cleaner);
 
-    for (auto &mapEntry : m_catalog.getSensorsAroundCleaner(cleaner))
+    for (auto &mapEntry : sensorsAround)
     {
         double distance = mapEntry.first; //Distance between the sensor and the air cleaner
         const Sensor &sensor = *mapEntry.second;
 
         unsigned int idxATMOBefore = computeATMOIndex(*getLastSensorMeasure(sensor, cleaner.getCleanerStart()));
+        cout << "idxATMOBefore : " << cleaner.getCleanerStart() << endl;
+        cout << "getLastSensorMeasure : " << (*getLastSensorMeasure(sensor, cleaner.getCleanerStart())).getId() << endl; // Meme ID ici
         unsigned int idxATMOAfter = computeATMOIndex(*getLastSensorMeasure(sensor, time(0)));
+        cout << "idxATMOAfter : " << time(0) << endl;
+        cout << "getLastSensorMeasure : " << (*getLastSensorMeasure(sensor, time(0))).getId() << endl; // Et ici, ???? donc pas d'effet
 
         if (idxATMOAfter > idxATMOBefore)
         {

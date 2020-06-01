@@ -23,6 +23,8 @@ void ProviderView(Provider &provider);
 void DeciderView(Decider &decider);
 void SuperUserView(SuperUser &superUser);
 
+void AnalyseImpact(Cleaner &cleaner);
+
 void ClearBuffer()
 {
     cin.clear();
@@ -122,6 +124,7 @@ void PrivateIndividualView(PrivateIndividual &privateIndividual)
 void ProviderView(Provider &provider)
 {
     int commande = 0;
+    Cleaner *cleaner = provider.getCleaner();
     cout << "Bienvenue " << provider.getLogin() << endl;
     cout << "Que voulez-vous faire ?" << endl
          << endl;
@@ -135,6 +138,8 @@ void ProviderView(Provider &provider)
         {
         case 1:
             //TODO Analyser l'impact
+            cout << "Cleaner : " << cleaner->getCoordinates().getLatitude() << " " << cleaner->getCoordinates().getLongitude() << endl;
+            AnalyseImpact(*(cleaner));
             break;
         case 2:
             cout << "Fermeture ..." << endl;
@@ -356,4 +361,11 @@ void SelectProvider() {
 
         ProviderView(providers[commande - 1]);
     }
+}
+
+void AnalyseImpact(Cleaner &cleaner) {
+    Services services(catalog);
+    std::pair<double,double> impact = services.computeCleanerImpact(cleaner);
+    cout << "Rayon d'impact du cleaner " << cleaner.getId() << " : " << impact.first << endl;
+    cout << "L'indice ATMO a été modifié en moyenne de : " << impact.second << endl;
 }

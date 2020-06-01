@@ -33,18 +33,6 @@ public:
     int computeATMOIndex(const Measure &measure) const;
 
     /**
-     * @brief Compute the Haversine distance between two coordinates
-     * 
-     * Compute the Harversine distance between two coordinates according to the Wikipedia formula:
-     * https://fr.wikipedia.org/wiki/Formule_de_haversine
-     * 
-     * @param c1 The first coordinates (longitude, latitude).
-     * @param c2 The second coordinates (longitude, latitude).
-     * @return The distance between the two points, in kilometers.
-     */
-    double haversineDistance(const Coordinates &c1, const Coordinates &c2) const;
-
-    /**
      * @brief Get the last sensor measure
      * 
      * @param sensor The sensor to return the last measure from.
