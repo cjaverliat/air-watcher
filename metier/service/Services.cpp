@@ -12,8 +12,6 @@ const unsigned int idxLevelsPM10[9] = {6, 13, 20, 27, 34, 41, 49, 64, 79};
 
 using namespace std;
 
-//TODO: S'assurer que les mesures sont triées par ordre chronologique pour optimiser les algos
-
 Services::Services(Catalog &catalog) : m_catalog(catalog)
 {
 }
@@ -205,7 +203,6 @@ std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor,
 {
     std::vector<const Sensor *> similarSensors;
 
-    //TODO: Liste supposée triée
     std::vector<const Measure *> refSensorMeasures = getSensorMeasures(refSensor);
 
     for (const Sensor &sensor : m_catalog.getSensors())
