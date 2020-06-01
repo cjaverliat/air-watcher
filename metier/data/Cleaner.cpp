@@ -1,12 +1,14 @@
 #include "Cleaner.h"
+
+#include <utility>
 #include "../../utils/Utils.h"
 
 Cleaner::Cleaner() {
 
 }
 
-Cleaner::Cleaner(const unsigned int & id, const string &description, const time_t &cleanerStart, const time_t &cleanerStop, const Coordinates & coordinates)
-    :_id(id),_description(description),_cleanerStart(cleanerStart),_cleanerStop(cleanerStop),_coordinates(coordinates)
+Cleaner::Cleaner(const unsigned int & id, string description, const time_t &cleanerStart, const time_t &cleanerStop, const Coordinates & coordinates)
+    :_id(id),_description(std::move(description)),_cleanerStart(cleanerStart),_cleanerStop(cleanerStop),_coordinates(coordinates)
 {
 
 }
@@ -75,19 +77,7 @@ istream & operator >> (istream & in, Cleaner & cleaner)
     getline(in, minutes, ':');
     getline(in, seconds, ';');
 
-    time_t rawtime;
-    time(&rawtime);
-
-    tm *cleanerStart{};
-    cleanerStart = localtime(&rawtime);
-    cleanerStart->tm_year = stoi(year);
-    cleanerStart->tm_mon = stoi(month);
-    cleanerStart->tm_mday = stoi(day);
-    cleanerStart->tm_hour = stoi(hour);
-    cleanerStart->tm_min = stoi(minutes);
-    cleanerStart->tm_sec = stoi(seconds);
-
-    cleaner._cleanerStart = mktime(cleanerStart); // Converts tm struct to time_t
+    cleaner._cleanerStart = toEpoch(stoi(year), stoi(month), stoi(day), stoi(hour), stoi(minutes), stoi(seconds));
 
     getline(in, year, '-');
     getline(in, month, '-');
@@ -96,16 +86,7 @@ istream & operator >> (istream & in, Cleaner & cleaner)
     getline(in, minutes, ':');
     getline(in, seconds, ';');
 
-    tm *cleanerStop{};
-    cleanerStop = localtime(&rawtime);
-    cleanerStop->tm_year = stoi(year);
-    cleanerStop->tm_mon = stoi(month);
-    cleanerStop->tm_mday = stoi(day);
-    cleanerStop->tm_hour = stoi(hour);
-    cleanerStop->tm_min = stoi(minutes);
-    cleanerStop->tm_sec = stoi(seconds);
-
-    cleaner._cleanerStop = mktime(cleanerStop); // Converts tm struct to time_t
+    cleaner._cleanerStop = toEpoch(stoi(year), stoi(month), stoi(day), stoi(hour), stoi(minutes), stoi(seconds));
 
     return in;
 }

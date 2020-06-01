@@ -289,8 +289,8 @@ std::pair<std::string, double> Services::getZoneCaracteristicAttribute(const Coo
 
 std::pair<double, double> Services::computeCleanerImpact(const Cleaner &cleaner) const
 {
-    unsigned int improvementsSum = 0;
-    unsigned int nbImprovements = 0;
+    int improvementsSum = 0;
+    int nbImprovements = 0;
     double impactRadius = 0;
 
     //Sorted by increasing distance
@@ -301,16 +301,12 @@ std::pair<double, double> Services::computeCleanerImpact(const Cleaner &cleaner)
         double distance = mapEntry.first; //Distance between the sensor and the air cleaner
         const Sensor &sensor = *mapEntry.second;
 
-        unsigned int idxATMOBefore = computeATMOIndex(*getLastSensorMeasure(sensor, cleaner.getCleanerStart()));
-        cout << "idxATMOBefore : " << cleaner.getCleanerStart() << endl;
-        cout << "getLastSensorMeasure : " << (*getLastSensorMeasure(sensor, cleaner.getCleanerStart())).getId() << endl; // Meme ID ici
-        unsigned int idxATMOAfter = computeATMOIndex(*getLastSensorMeasure(sensor, time(0)));
-        cout << "idxATMOAfter : " << time(0) << endl;
-        cout << "getLastSensorMeasure : " << (*getLastSensorMeasure(sensor, time(0))).getId() << endl; // Et ici, ???? donc pas d'effet
+        int idxATMOBefore = computeATMOIndex(*getLastSensorMeasure(sensor, cleaner.getCleanerStart() - 1));
+        int idxATMOAfter = computeATMOIndex(*getLastSensorMeasure(sensor, cleaner.getCleanerStop()));
 
-        if (idxATMOAfter > idxATMOBefore)
+        if (idxATMOAfter < idxATMOBefore)
         {
-            improvementsSum += idxATMOAfter - idxATMOBefore;
+            improvementsSum += idxATMOBefore - idxATMOAfter;
             ++nbImprovements;
             impactRadius = distance;
         }
@@ -322,7 +318,7 @@ std::pair<double, double> Services::computeCleanerImpact(const Cleaner &cleaner)
 
     if (nbImprovements > 0)
     {
-        double meanImprovement = improvementsSum / nbImprovements;
+        double meanImprovement = double(improvementsSum) / nbImprovements;
         return std::make_pair(impactRadius, meanImprovement);
     }
     else

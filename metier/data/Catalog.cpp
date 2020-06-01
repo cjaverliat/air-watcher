@@ -45,11 +45,13 @@ Cleaner* Catalog::getCleanerById(unsigned int cleanerId) {
 
 std::vector<std::pair<double, const Sensor *>> Catalog::getSensorsAroundCleaner(const Cleaner &cleaner) {
     std::vector<std::pair<double, const Sensor *>> sensorsAround;
-    for (unsigned i(0); i < _sensors.size(); ++i){
-        unsigned d = haversineDistance(cleaner.getCoordinates(),_sensors[i].getCoordinates());
-        sensorsAround.push_back( std::pair<double, const Sensor *>(d,&_sensors[i]) );
+    for (Sensor & _sensor : _sensors){
+        double d = haversineDistance(cleaner.getCoordinates(), _sensor.getCoordinates());
+        sensorsAround.emplace_back(d, &_sensor);
     }
-    sort(sensorsAround.begin(), sensorsAround.end(), this->comparePair);
+
+    //Trie les capteurs par distance au cleaner
+    sort(sensorsAround.begin(), sensorsAround.end(), Catalog::comparePair);
     return sensorsAround;
 }
 
