@@ -143,8 +143,6 @@ void ProviderView(Provider &provider)
             cout << "Fermeture ..." << endl;
             return;
         case 1:
-            //TODO Analyser l'impact
-            cout << "Cleaner : " << cleaner->getCoordinates().getLatitude() << " " << cleaner->getCoordinates().getLongitude() << endl;
             AnalyseImpact(*(cleaner));
             break;
 
@@ -373,6 +371,6 @@ void SelectProvider() {
 void AnalyseImpact(Cleaner &cleaner) {
     Services services(catalog);
     std::pair<double,double> impact = services.computeCleanerImpact(cleaner);
-    cout << "Rayon d'impact du cleaner " << cleaner.getId() << " : " << impact.first << endl;
-    cout << "L'indice ATMO a été modifié en moyenne de : " << impact.second << endl;
+    cout << "Rayon d'impact du cleaner " << cleaner.getId() << " : " << impact.first << "km." << endl;
+    cout << "Entre le démarrage et l'arrêt du cleaner, l'indice ATMO a diminué en moyenne de " << impact.second << " unités ATMO." << endl;
 }

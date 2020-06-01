@@ -18,7 +18,7 @@ protected:
     Coordinates _coordinates;
 public:
     Cleaner();
-    Cleaner(const unsigned int & id,const string & description, const time_t & cleanerStart,const time_t & cleanerStop, const Coordinates & coordinates);
+    Cleaner(const unsigned int & id,string  description, const time_t & cleanerStart,const time_t & cleanerStop, const Coordinates & coordinates);
     string getDescription() const;
     void setDescription(const string &description);
     time_t getCleanerStart() const;
