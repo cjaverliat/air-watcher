@@ -328,7 +328,7 @@ void SelectPrivateIndividual() {
             continue;
         }
 
-        PrivateIndividualView(privateIndividuals[commande]);
+        PrivateIndividualView(privateIndividuals[commande - 1]);
     }
 }
 
@@ -354,6 +354,6 @@ void SelectProvider() {
             continue;
         }
 
-        ProviderView(providers[commande]);
+        ProviderView(providers[commande - 1]);
     }
 }
