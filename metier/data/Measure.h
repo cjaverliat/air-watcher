@@ -32,6 +32,8 @@ public:
     Sensor* getSensor() const;
     unsigned int getId() const;
     friend istream & operator >> (istream & in, Measure & measure);
+
+    static bool dateComparator(const Measure& m1, const Measure &m2);
 };
 
 #endif // MEASURE_H

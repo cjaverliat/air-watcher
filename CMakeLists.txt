@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 project(airwatcher)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Werror -Wfatal-errors")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -Wfatal-errors")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 set(SOURCES
         ${PROJECT_SOURCE_DIR}/main.cpp
@@ -20,7 +22,7 @@ set(SOURCES
         ${PROJECT_SOURCE_DIR}/metier/acteurs/PrivateIndividual.cpp
         ${PROJECT_SOURCE_DIR}/metier/acteurs/Provider.cpp
         ${PROJECT_SOURCE_DIR}/metier/acteurs/SuperUser.cpp
-        )
+        ${PROJECT_SOURCE_DIR}/utils/Utils.cpp)
 
 set(HEADERS
         ${PROJECT_SOURCE_DIR}/metier/service/CSVParser.h
@@ -37,7 +39,7 @@ set(HEADERS
         ${PROJECT_SOURCE_DIR}/metier/acteurs/PrivateIndividual.h
         ${PROJECT_SOURCE_DIR}/metier/acteurs/Provider.h
         ${PROJECT_SOURCE_DIR}/metier/acteurs/SuperUser.h
-        )
+        ${PROJECT_SOURCE_DIR}/utils/Utils.h)
 
 # Copy resources
 file(COPY ${PROJECT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -1,7 +1,7 @@
 #include "PrivateIndividual.h"
 
 PrivateIndividual::PrivateIndividual(Catalog* catalog)
-    : _catalog(catalog){
+    : _userScore(0), _catalog(catalog) {
 
 }
 
@@ -37,7 +37,7 @@ istream & operator>>(istream &in, PrivateIndividual & privateIndividual) {
     getline(in, sensorId, ';');
     getline(in, tmp, '\n');
 
-    sensorId = sensorId.substr(6,sensorId.size());
+    sensorId = sensorId.substr(6, sensorId.size() - 6);
 
     privateIndividual._login = userId;
     privateIndividual._sensor = privateIndividual._catalog->getSensorById(stoi(sensorId));

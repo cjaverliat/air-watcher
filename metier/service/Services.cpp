@@ -12,8 +12,6 @@ const unsigned int idxLevelsPM10[9] = {6, 13, 20, 27, 34, 41, 49, 64, 79};
 
 using namespace std;
 
-//TODO: S'assurer que les mesures sont triées par ordre chronologique pour optimiser les algos
-
 Services::Services(Catalog &catalog) : m_catalog(catalog)
 {
 }
@@ -66,7 +64,7 @@ int Services::computeATMOIndex(const Measure &measure) const
 
 double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2) const
 {
-    int r = 6371e3; //Earth radius in meters
+    int r = 6371; //Earth radius in kilometers
     double alpha = (c2.getLatitude() - c1.getLatitude()) / 2;
     double beta = (c2.getLongitude() - c1.getLongitude()) / 2;
     double distance = 2 * r * asin(sqrt(pow(sin(alpha), 2) + cos(c1.getLatitude()) * cos(c2.getLatitude()) * pow(sin(beta), 2)));
@@ -77,10 +75,12 @@ double Services::haversineDistance(const Coordinates &c1, const Coordinates &c2)
 
 const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) const
 {
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
+
     //Parcourt en sens inverse
     for (auto it = m_catalog.getMeasures().end() - 1; it >= m_catalog.getMeasures().begin(); --it)
     {
-        if (it->getDate() <= t)
+        if (it->getSensor()->getId() == sensor.getId() && it->getDate() <= t)
         {
             return &(*it);
         }
@@ -92,6 +92,7 @@ const Measure *Services::getLastSensorMeasure(const Sensor &sensor, time_t t) co
 std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &sensor, time_t startTime, time_t endTime) const
 {
     assert(difftime(endTime, startTime) >= 0);
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
 
     std::vector<const Measure *> measures;
 
@@ -108,6 +109,8 @@ std::vector<const Measure *> Services::getSensorMeasuresInPeriod(const Sensor &s
 
 std::vector<const Measure *> Services::getSensorMeasures(const Sensor &sensor) const
 {
+    assert(is_sorted(m_catalog.getMeasures().begin(), m_catalog.getMeasures().end(), Measure::dateComparator));
+
     std::vector<const Measure *> measures;
 
     for (const Measure &m : m_catalog.getMeasures())
@@ -144,10 +147,12 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
 
     if (n > 0)
     {
+        cout << "Moyenne sur les dernières données de " << n << " capteur(s)." << endl;
         return idxSum / n;
     }
     else
     {
+        cout << "Aucune donnée disponible avec les paramètres choisis." << endl;
         return -1;
     }
 }
@@ -158,10 +163,12 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
 
     unsigned int idxSum = 0;
     double n = 0;
+    double nSensors = 0;
 
     for (const Sensor &sensor : m_catalog.getSensors())
     {
         double d = haversineDistance(zoneCenter, sensor.getCoordinates());
+        bool used = false;
 
         if (d <= zoneRadius)
         {
@@ -171,16 +178,23 @@ double Services::meanAirQuality(const Coordinates &zoneCenter, double zoneRadius
             {
                 idxSum += computeATMOIndex(*m);
                 ++n;
+                used = true;
             }
+        }
+
+        if(used) {
+            ++nSensors;
         }
     }
 
     if (n > 0)
     {
+        cout << n << " donnée(s) utilisée(s), utilisant " << nSensors << " capteur(s)." << endl;
         return idxSum / n;
     }
     else
     {
+        cout << "Aucune donnée disponible à ce moment dans cette zone." << endl;
         return -1;
     }
 }
@@ -189,7 +203,6 @@ std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor,
 {
     std::vector<const Sensor *> similarSensors;
 
-    //TODO: Liste supposée triée
     std::vector<const Measure *> refSensorMeasures = getSensorMeasures(refSensor);
 
     for (const Sensor &sensor : m_catalog.getSensors())

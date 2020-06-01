@@ -1,4 +1,5 @@
 #include "Cleaner.h"
+#include "../../utils/Utils.h"
 
 Cleaner::Cleaner() {
 
@@ -54,13 +55,13 @@ istream & operator >> (istream & in, Cleaner & cleaner)
 {
     string id;
     getline(in, id, ';');
-    id = id.substr(7, id.size());
+    id = id.substr(7, id.size() - 7);
     cleaner._id = stoi(id);
 
     string longitude, latitude;
     getline(in, latitude, ';');
     getline(in, longitude, ';');
-    cleaner._coordinates = Coordinates(stod(latitude), stod(longitude));
+    cleaner._coordinates = Coordinates(toRadians(stod(latitude)), toRadians(stod(longitude)));
 
     string description;
     getline(in, description, ';');
@@ -88,6 +89,12 @@ istream & operator >> (istream & in, Cleaner & cleaner)
 
     cleaner._cleanerStart = mktime(cleanerStart); // Converts tm struct to time_t
 
+    getline(in, year, '-');
+    getline(in, month, '-');
+    getline(in, day, ' ');
+    getline(in, hour, ':');
+    getline(in, minutes, ':');
+    getline(in, seconds, ';');
 
     tm *cleanerStop{};
     cleanerStop = localtime(&rawtime);

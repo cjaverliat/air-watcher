@@ -27,7 +27,7 @@ istream & operator>>(istream & in, Provider & provider) {
     getline(in, cleanerId, ';');
     getline(in, tmp, '\n');
 
-    cleanerId = cleanerId.substr(7, cleanerId.size());
+    cleanerId = cleanerId.substr(7, cleanerId.size() - 7);
 
     provider._login = providerId;
 

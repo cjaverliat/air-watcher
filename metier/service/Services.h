@@ -40,7 +40,7 @@ public:
      * 
      * @param c1 The first coordinates (longitude, latitude).
      * @param c2 The second coordinates (longitude, latitude).
-     * @return The distance between the two points, in meters.
+     * @return The distance between the two points, in kilometers.
      */
     double haversineDistance(const Coordinates &c1, const Coordinates &c2) const;
 
