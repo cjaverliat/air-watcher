@@ -213,6 +213,7 @@ std::vector<const Sensor *> Services::getSimilarSensors(const Sensor &refSensor,
             const Measure &refMeasure = *refSensorMeasures.at(i);
             const Measure &currentSensorMeasure = *currentSensorMeasures.at(i);
             bool atmoIndexSimilar = abs(computeATMOIndex(refMeasure) - computeATMOIndex(currentSensorMeasure)) <= epsilonATMOIndex;
+            cout << atmoIndexSimilar << endl;
             bool timeSimilar = abs(difftime(refMeasure.getDate(), currentSensorMeasure.getDate())) <= epsilonTime;
 
             if (!atmoIndexSimilar || !timeSimilar)

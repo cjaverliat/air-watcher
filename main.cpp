@@ -24,6 +24,7 @@ void DeciderView(Decider &decider);
 void SuperUserView(SuperUser &superUser);
 
 void AnalyseImpact(Cleaner &cleaner);
+void IdentifySimilarSensor();
 
 void ClearBuffer()
 {
@@ -276,7 +277,7 @@ void DeciderView(Decider &decider)
             break;
         }
         case 2:
-            //TODO Identifier les capteurs similaires
+            IdentifySimilarSensor();
             break;
 
         default:
@@ -373,4 +374,28 @@ void AnalyseImpact(Cleaner &cleaner) {
     std::pair<double,double> impact = services.computeCleanerImpact(cleaner);
     cout << "Rayon d'impact du cleaner " << cleaner.getId() << " : " << impact.first << "km." << endl;
     cout << "Entre le démarrage et l'arrêt du cleaner, l'indice ATMO a diminué en moyenne de " << impact.second << " unités ATMO." << endl;
+}
+
+void IdentifySimilarSensor() {
+    unsigned int sensorId;
+    double epsATMO, epsTime;
+    cout << "Id du capteur de référence" << endl;
+    cin >> sensorId;
+    if(catalog.getSensorById(sensorId) == 0) {
+        cerr << "Id invalide" << endl;
+        return;
+    }
+    cout << "Différence d'indice ATMO maximum" << endl;
+    cin >> epsATMO;
+    cout << "Différence de temps maximum entre les mesures" << endl;
+    cin >> epsTime;
+    Sensor refSensor = *(catalog.getSensorById(sensorId));
+    Services services(catalog);
+    std::vector<const Sensor *> similarSensors = services.getSimilarSensors(refSensor, epsATMO, epsTime);
+    cout << "L'id du capteur de référence est : "<< refSensor.getId() << " de coordonnées (" << refSensor.getCoordinates().getLatitude() << "," << refSensor.getCoordinates().getLongitude() << ")" << endl;
+    cout << "Les capteurs similaires sont : " << endl;
+    for (const Sensor * s : similarSensors){
+        cout << "Id : " << s->getId() << " de coordonnées (" << s->getCoordinates().getLatitude() << "," << s->getCoordinates().getLongitude() << "), à une distance de " <<
+        (*s).getCoordinates().distanceTo( refSensor.getCoordinates() ) << endl;
+    }
 }
