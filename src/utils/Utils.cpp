@@ -17,11 +17,11 @@ time_t toEpoch(int year, int month, int day, int hours, int minutes, int seconds
     timeInfo->tm_year = year - 1900;
     timeInfo->tm_mon = month - 1;
     timeInfo->tm_mday = day;
-    timeInfo->tm_hour = hours + 1; //UTC+1
+    timeInfo->tm_hour = hours;
     timeInfo->tm_min = minutes;
     timeInfo->tm_sec = seconds;
 
-    return mktime (timeInfo);
+    return timegm(timeInfo);
 }
 
 double haversineDistance(const Coordinates &c1, const Coordinates &c2)
