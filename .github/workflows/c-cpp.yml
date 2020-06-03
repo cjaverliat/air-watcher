@@ -7,13 +7,16 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  build_and_test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: build
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: build and test
       run: |
         chmod +x build.sh
         ./build.sh
+        echo "Running unit tests"
+        (cd build/tests/unit_tests && ./airwatcher_unit_tests)
+        echo "Running validation tests"
+        (cd build/tests/validation_tests && ./airwatcher_validation_tests)

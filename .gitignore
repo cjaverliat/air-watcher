@@ -43,9 +43,16 @@ cmake_install.cmake
 CMakeCache.txt
 CMakeFiles/
 airwatcher
+airwatcher_run
+libairwatcher_lib.a
+airwatcher_validation_tests
+airwatcher_unit_tests
 airwatcher.cbp
 .idea/*
 
+bin/
+
+lib/
 #nicolas
 src2/*
 
